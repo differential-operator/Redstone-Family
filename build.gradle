@@ -23,7 +23,7 @@ sourceSets.main.resources {
     // Exclude common development only resources from finalized outputs
     exclude("**/*.bbmodel") // BlockBench project files
     exclude('**/.gitkeep') // Empty-directory placeholders
-    exclude("src/generated/**/.cache") // datagen cache files
+    exclude('**/.cache/**') // datagen cache files, relative to resource roots
 }
 
 repositories {
@@ -138,6 +138,17 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// Read-only art checks. Override with -PartPython=C:/path/to/python.exe if needed.
+tasks.register('validateArt', Exec) {
+    workingDir project.projectDir
+    commandLine providers.gradleProperty('artPython').getOrElse('python'),
+            'tools/art/art_pipeline.py', 'check'
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('validateArt')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

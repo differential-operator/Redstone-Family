@@ -81,6 +81,24 @@ Empty resource directories use .gitkeep placeholders, excluded from packaged res
 Blockbench .bbmodel source projects are also excluded from packaged resources.
 Reserved geometry and animation directories do not install or enable GeckoLib.
 
+## Art workflow (stage 1)
+
+Art sources belong in art/sources, references in art/references, and disposable future previews in build/art.
+See [workflow](docs/art/workflow.md), [style guide](docs/art/style-guide.md), and [agent rules](AGENTS.md).
+Stage 1 supplies an empty manifest, model schema and read-only validation only. No models, textures, exporters or new game content are added.
+
+```powershell
+python -m unittest discover -s tools/art -p "test_*.py"
+python tools/art/art_pipeline.py validate
+python tools/art/art_pipeline.py check
+.\gradlew.bat clean build
+python tools/art/art_pipeline.py inspect-jar
+```
+
+Gradle check includes validateArt; configure -PartPython=C:/path/to/python.exe if necessary.
+No art dependency installation is needed in stage 1. Every later stage waits for user confirmation.
+Diamond-equivalent redstone sword properties and vanilla redstone slime behavior are temporary technical test baselines, not final gameplay design.
+
 ## Licenses and mappings
 
 The mod license remains All Rights Reserved. TEMPLATE_LICENSE.txt retains the original NeoForge MDK template license.

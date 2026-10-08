@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.235",
+  "neogradle": "7.1.38",
+  "gradle": "9.2.1",
+  "java_target": 21,
+  "java_observed": "Temurin 21.0.11+10",
+  "parchment_minecraft": "1.21.1",
+  "parchment_mappings": "2024.11.17",
+  "python_observed": "3.12.12",
+  "node_observed": "24.20.0",
+  "pillow": {"status": "not_installed_in_project", "version": null},
+  "blockbench": {"status": "not_verified", "version": null},
+  "blockbench_mcp": {"status": "not_configured", "version": null},
+  "geckolib": {"status": "not_installed_in_project", "version": null},
+  "blender": {"status": "not_verified", "version": null}
+}
